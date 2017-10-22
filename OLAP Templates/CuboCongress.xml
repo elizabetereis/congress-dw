@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<SCHEMA name="congress">
+<Dimension name="Autor">
+<Hierarchy hasAll="true" 
+allMemberName="All Autor"
+primaryKey="idautor" 
+>
+<Table name="autor"/>
+<Level name="Workplace" column="workplace" 
+uniqueMembers="false"
+/>
+<Level name="Autorname" column="autorname" 
+uniqueMembers="false"
+/>
+</Hierarchy>
+</Dimension> 
+<Dimension name="Congress">
+<Hierarchy hasAll="true" 
+allMemberName="All Congress"
+primaryKey="idcongress" 
+>
+<Table name="congress"/>
+<Level name="Year" column="year" 
+uniqueMembers="false"
+/>
+<Level name="Congressname" column="congressname" 
+uniqueMembers="false"
+/>
+</Hierarchy>
+</Dimension> 
+<Cube name="Admissions">
+<Table name="admissions"/>
+<DimensionUsage name="Autor" source="Autor" foreignKey="idadmautor"/>
+<DimensionUsage name="Congress" source="Congress" foreignKey="idadmcongress"/>
+<Measure name="Accepted" column="accepted" aggregator="sum" formatString="#,###"/>
+<Measure name="Refused" column="refused" aggregator="sum" formatString="#,###"/>
+</Cube> 
+</SCHEMA>
